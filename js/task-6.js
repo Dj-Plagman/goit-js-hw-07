@@ -1,14 +1,13 @@
 //скрипт, який при зникнені фокуса на інпуті, перевіря його вміст на правильну кількість символів.
 
-const inputName = document.querySelector('#validation-input')
-
-inputName.addEventListener('blur', onInputBlur);
-
-function onInputBlur(event) {
-    console.log(event.currentTarget.value.length);
-    if (event.currentTarget.value.length !== Number(inputName.dataset.length)) {
-        inputName.classList.add('invalid');
-    } else {
-        inputName.classList.replace('invalid', 'valid');
+document.getElementById('validation-input').onblur = function() {
+    console.log(this.value.length);
+    if((this.getAttribute('data-length') > this.value.length) || (this.getAttribute('data-length') < this.value.length)) {
+        this.classList.remove('valid');
+        this.classList.add('invalid');
     }
-};
+    else {
+        this.classList.remove('invalid');
+        this.classList.add('valid');
+    }
+}
